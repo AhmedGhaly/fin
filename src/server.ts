@@ -5,13 +5,11 @@ import { filterImageFromURL, deleteLocalFiles, validate_URL } from './util/util'
 
 (async () => {
 
-  // Init the Express application
   const app = express();
 
   // Set the network port
   const port = process.env.PORT || 8082;
 
-  // Use the body parser middleware for post requests
   app.use(bodyParser.json());
 
   // GET /filteredimage?image_url={{URL}}
@@ -39,6 +37,7 @@ import { filterImageFromURL, deleteLocalFiles, validate_URL } from './util/util'
     }
 
     const image_file = await filterImageFromURL(image_url)
+
     res.sendFile(image_file)
 
     res.on('finish', () => {
@@ -53,7 +52,6 @@ import { filterImageFromURL, deleteLocalFiles, validate_URL } from './util/util'
   });
 
 
-  // Start the Server
   app.listen(port, () => {
     console.log(`server running http://localhost:${port}`);
     console.log(`press CTRL+C to stop server`);
